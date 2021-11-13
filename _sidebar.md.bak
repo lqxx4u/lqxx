@@ -1,0 +1,30 @@
+* 00技术
+  * 01工具包
+    * docsify
+      - [docsify](/00技术/01工具包/docsify/docsify.md)
+        * themes
+    * git
+      - [git](/00技术/01工具包/git/git.md)
+      - [github](/00技术/01工具包/git/github.md)
+    * 测试
+      - [postmanCollections](/00技术/01工具包/测试/postmanCollections.md)
+      * 第5章Postman工具之collection集合 - DaBenYing - 博客园_files
+  * 03基础
+    * 数据库基础
+      - [sql](/00技术/03基础/数据库基础/sql.md)
+* 01读书笔记
+  * 消息队列
+    * Kafka权威指南
+      - [1.初识Kafka](/01读书笔记/消息队列/Kafka权威指南/1.初识Kafka.md)
+      - [11.流式处理](/01读书笔记/消息队列/Kafka权威指南/11.流式处理.md)
+      - [2.broker配置](/01读书笔记/消息队列/Kafka权威指南/2.broker配置.md)
+      - [3.Kafka生产者](/01读书笔记/消息队列/Kafka权威指南/3.Kafka生产者.md)
+      - [4.kafka消费者](/01读书笔记/消息队列/Kafka权威指南/4.kafka消费者.md)
+      - [5.深入kafka](/01读书笔记/消息队列/Kafka权威指南/5.深入kafka.md)
+      - [6.可靠数据传输](/01读书笔记/消息队列/Kafka权威指南/6.可靠数据传输.md)
+      - [7.构建数据管道](/01读书笔记/消息队列/Kafka权威指南/7.构建数据管道.md)
+      - [8.跨集群数据镜像](/01读书笔记/消息队列/Kafka权威指南/8.跨集群数据镜像.md)
+* common
+  - [Jackson](/common/Jackson.md)
+* 典型应用场景
+  - [秒杀下单](/典型应用场景/秒杀下单.md)

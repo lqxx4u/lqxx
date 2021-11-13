@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.cnblogs.com/yingjiyu/p/12199415.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin-when-crossorigin">
+    <meta name="description" content="第5章Postman工具之collection集合 5.1创建集合 5.2共享集合 5.3导入/导出文件 5.4集合运行 5.5使用数据文件 5.6集合运行结果排错 5.1创建集合 可以理解成请求的总">
+    <meta property="og:description" content="第5章Postman工具之collection集合 5.1创建集合 5.2共享集合 5.3导入/导出文件 5.4集合运行 5.5使用数据文件 5.6集合运行结果排错 5.1创建集合 可以理解成请求的总">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>第5章Postman工具之collection集合 - DaBenYing - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.svg" type="image/svg+xml">
+    
+    <link rel="stylesheet" href="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/bundle-red_autumnal_leaves.min.css">
+    <link type="text/css" rel="stylesheet" href="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/cnblogs.css">
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/bundle-red_autumnal_leaves-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yingjiyu/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yingjiyu/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yingjiyu/wlwmanifest.xml">
+    <script>
+        var currentBlogId = 528843;
+        var currentBlogApp = 'yingjiyu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'red_autumnal_leaves';
+        var visitorUserId = '';
+        var hasCustomScript = false;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function(){ return ''; } });
+            }
+        } catch(error) { }
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-01-16 01:16';
+        </script>
+    <script src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/blog-common.min.js.下载"></script><style type="text/css">.medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}</style>
+    
+    
+    
+    <script type="text/javascript">
+        window.codeHighlightEngine = 1
+        window.enableCodeLineNumber = false
+    </script>
+</head>
+<body class="skin-red_autumnal_leaves has-navbar has-bannerbar">
+    <a name="top"></a>
+        <img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/35695-20211028154945083-1716912556.jpg" style="display:none" onload="countImpressions(&#39;ad&#39;, &#39;C0-baidu&#39;)">
+        <a target="_blank" href="https://cloud.baidu.com/campaign/20211111/index.html?track=cp:bokeyuan|pf:pc|pp:H-bokeyuan-21shuangshiyi-C0neiyedingbuPCtonglanbanner-cpc|pu:21shuangshiyi-C0neiyedingbuPCtonglanbanner-cpc|ci:21ssy|kw:10511932" onclick="clickBanner(497);countClicks(&#39;ad&#39;, &#39;C0-baidu&#39;)">
+            <div class="bannerbar aliyun forpc" style="background-size: contain; background-image: url(https://img2020.cnblogs.com/blog/35695/202110/35695-20211028154945083-1716912556.jpg)">
+            </div>
+        </a>     
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/logo.svg" alt="博客园Logo"></a></li>
+                <li><a href="https://www.cnblogs.com/" onclick="countClicks(&#39;skin-navbar-sitehome&#39;)">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-news&#39;)">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-q&#39;)">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-brands&#39;)">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-ing&#39;)">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="countClicks(&#39;nav&#39;, &#39;skin-navbar-edu&#39;)">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3">
+                        <button type="submit" id="zzk_search_button">
+                            <img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/search.svg" alt="搜索">
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔" style="display: none;">
+                        <img id="new_post_icon" class="navbar-icon" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/newpost.svg" alt="写随笔">
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客" style="display: none;">
+                        <img id="myblog_icon" class="navbar-icon" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/myblog.svg" alt="我的博客">
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息" style="display: none;">
+                        <img id="msg_icon" class="navbar-icon" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/message.svg" alt="短消息">
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown" style="display: none;">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/avatar-default.svg" alt="用户头像">
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/lite-mode-check.svg" class="hide"><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/" style="display: inline;">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()" style="display: inline;">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        
+
+    </div>
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/yingjiyu/"><img id="blogLogo" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yingjiyu/"></a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yingjiyu/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/DaBenYing">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/yingjiyu/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<span id="stats_post_count">随笔 - 63&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 0&nbsp; </span>
+<span id="stats-total-view-count">阅读 - 
+<span title="总阅读数: 23028">
+23028</span></span>
+
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yingjiyu/p/12199415.html">
+    <span>第5章Postman工具之collection集合</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p><span style="font-family: 宋体">第</span>5章Postman工具之collection集合</p>
+<p>5.1创建集合</p>
+<p>5.2共享集合</p>
+<p>5.3导入/导出文件</p>
+<p>5.4集合运行</p>
+<p>5.5使用数据文件</p>
+<p>5.6集合运行结果排错</p>
+<h2>5.1创建集合</h2>
+<p><span style="font-family: 宋体">可以理解成请求的总和或合集。使用集合是</span>Postman工具实现自动化测试的必要条件。Postman集合允许分组保存请求，用户还可以在集合下面创建文件夹，还可以对集合下的请求再次分组。</p>
+<p><span style="font-family: 宋体">（</span>1<span style="font-family: 宋体">）打开侧边栏“</span><span style="font-family: Calibri">collection</span><span style="font-family: 宋体">”选项卡</span></p>
+<p><span style="font-family: 宋体">（</span>2<span style="font-family: 宋体">）单机下方图片中的“</span><span style="font-family: Calibri">New Collection</span><span style="font-family: 宋体">”图标</span></p>
+<p><span style="font-family: 宋体">（</span>3<span style="font-family: 宋体">）输入集合名称和描述信息（创建各种选项内涵深挖）</span></p>
+<p><span style="font-family: 宋体">如图，为一个</span>CRM系统的一个接口集合，总共有11个请求。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116005556833-1651216307.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">此方法的好处：</span></p>
+<p><span style="font-family: 宋体">（</span>1）将请求保存到集合和文件夹中，能够更结构化地保存请求，方便再次使用。</p>
+<p><span style="font-family: 宋体">（</span>2<span style="font-family: 宋体">）</span><span style="font-family: 宋体">方便后续构建集成测试套件。</span></p>
+<p><span style="font-family: 宋体">（</span>3）方便使用脚本在API请求之间传递数据，并构建能够反映实际用例的工流。</p>
+<p><span style="font-family: 宋体">添加集合文件夹中的请求：</span></p>
+<p>（1）<span style="font-family: 宋体">在</span>Builder中新建一个请求，单击“Save”，选择“松勤CRM系统接口”，那么就可以保存到此文件夹中。</p>
+<p>（2）<span style="font-family: 宋体">从</span>“History”选项卡中保存请求到集合</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">文件夹的一些基本操作：</span></p>
+<p><span style="font-family: 宋体">点击文件夹后面</span>“...”图标，或者在文件夹位置右键单机，出现菜单栏，如图:</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116005646044-652034558.png" alt="" class="medium-zoom-image"></p>
+<p>·Share Collection：分享集合</p>
+<p>&nbsp;&nbsp;·Manage Role</p>
+<p>&nbsp;&nbsp;·Rename:集合重命名</p>
+<p>&nbsp;&nbsp;·Edit：编辑集合</p>
+<p>&nbsp;&nbsp;·Add Request：增加一个请求</p>
+<p>&nbsp;&nbsp;·Add Folder:增加一个子文件夹</p>
+<p>&nbsp;&nbsp;·Duplicate：复制此集合</p>
+<p>&nbsp;&nbsp;·Export：导出集合（以JSON格式保存）</p>
+<p>&nbsp;&nbsp;·Delete:删除此集合</p>
+<h2>5.2共享集合</h2>
+<p><span style="font-family: 宋体">要想分享集合，必须要登录</span>Postman账号。点击集合旁边的“...”图标，选择“Share</p>
+<h2>5.3导入/导出文件</h2>
+<p>&nbsp;&nbsp;Postman可以通过文件的方式导出和导入Collection、Environments、Globals和Header Presets。</p>
+<p><span style="font-family: 宋体">（</span>1<span style="font-family: 宋体">）导出</span><span style="font-family: Calibri">Collection</span><span style="font-family: 宋体">文件</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">单击</span>“Collection”选项卡下的“...”图标，在弹出的列表中选择“Export”选项，导出集合文件，如图。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116005805820-2080196193.png" alt="" class="medium-zoom-image"></p>
+<p>Postman可以导出3种格式的集合，Collection v1、Collection v2、Collection v2.1，其中Collection v2.1是官方推荐格式。</p>
+<p><span style="font-family: 宋体">（</span>2<span style="font-family: 宋体">）导出</span><span style="font-family: Calibri">/</span><span style="font-family: 宋体">导入</span><span style="font-family: Calibri">Environments</span><span style="font-family: 宋体">文件</span></p>
+<p><span style="font-family: 宋体">单击右上角</span>“Manage Environments”图标，出现下图。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116005906708-1662781401.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">下载按钮可以导出环境变量文件，</span>import按钮可以导入环境变量文件。</p>
+<p><span style="font-family: 宋体">（</span>3<span style="font-family: 宋体">）导出</span><span style="font-family: Calibri">Globals</span><span style="font-family: 宋体">文件</span></p>
+<p><span style="font-family: 宋体">点击上图中的</span>“Globals”按钮，进入下图全局变量界面，单击“Download as JSON”按钮，可以将Globals导出成JSON文件。</p>
+<p>&nbsp;<img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116005941897-908394527.png" alt="" class="medium-zoom-image"></p>
+<p>(4)<span style="font-family: 宋体">导入、导出</span><span style="font-family: Calibri">Postman</span><span style="font-family: 宋体">数据</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">点击右上角的</span>“SETING”进入settings设置界面。选择”Data”<span style="font-family: 宋体">选项卡，</span>Postman允许打包所有Collections、Environments、Globals和Header Presets，并导出一个JSON文件，如下图。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010003889-1934107423.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;</p>
+<p>&nbsp;“Download”可以导出我们要的数据，也可以利用“Import data”下的“选择文件”按钮，选择一个JSON文件，导入Postman数据。还可以通过工具栏中的“Import”按钮，导入一个Collections、Environments、Globals等文件，如下图。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010040302-1754234876.png" alt="" class="medium-zoom-image"></p>
+<h2>5.4集合运行</h2>
+<p><span style="font-family: 宋体">单个请求可以直接点击</span>“send”发送，但是集合需要在Collection Runner集合运行器窗口，如下图<span style="font-family: 宋体">：</span></p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010119575-761653637.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;</p>
+<p>&nbsp;<span style="font-family: 宋体">点击</span>“run”,打开Collection Runner集合运行器窗口，下图：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010201487-1073395603.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体">（</span>1<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Choose a collection or folder</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">选择要运行的集合或文件夹，当运行一个集合时，集合中的所有请求都按照它们在</span>Postman<span style="font-family: 宋体">中出现的顺序发送，这意味着每个文件夹和文件夹中的请求都是按顺序执行的。可以通过在</span><span style="font-family: Calibri">Tests</span><span style="font-family: 宋体">里设置</span><span style="font-family: Calibri">setNextRequest()</span><span style="font-family: 宋体">方法更改请求发送的顺序以反映工作流程。如上图选择“</span><span style="font-family: Calibri">CRM</span><span style="font-family: 宋体">系统接口”集合文件，右侧区域显示具体的接口请求。</span></p>
+<p><span style="font-family: 宋体">（</span>2<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Environment</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">设置环境变量。</span></p>
+<p><span style="font-family: 宋体">（</span>3<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Iterations</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">设置集合运行的次数，图为</span>1<span style="font-family: 宋体">次。</span></p>
+<p><span style="font-family: 宋体">（</span>4<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Delay</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">设置发送每个请求之间的时间间隔（</span>ms<span style="font-family: 宋体">），比如设置为</span><span style="font-family: Calibri">100</span><span style="font-family: 宋体">，意思是发送完一个请求，等待</span><span style="font-family: Calibri">100ms</span><span style="font-family: 宋体">才发送下一个请求。图为</span><span style="font-family: Calibri">0</span><span style="font-family: 宋体">。</span></p>
+<p><span style="font-family: 宋体">（</span>5<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Log Responses</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">设置集合运行时所记录的日志级别，默认情况下，记录所有</span>Requests<span style="font-family: 宋体">的响应日志。日志包含</span><span style="font-family: Calibri">3</span><span style="font-family: 宋体">个级别：</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·<span style="font-family: Calibri">For all requests:</span><span style="font-family: 宋体">记录所有请求的响应日志。</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·<span style="font-family: Calibri">For failed requests:</span><span style="font-family: 宋体">只记录至少一个失败测试请求的响应日志。</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·<span style="font-family: Calibri">For no requests:</span><span style="font-family: 宋体">不会记录响应日志</span></p>
+<p><span style="font-family: 宋体">（</span>6<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Data</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">为集合提供运行的数据文件。（</span>JSON<span style="font-family: 宋体">和</span><span style="font-family: Calibri">CSV</span><span style="font-family: 宋体">）</span></p>
+<p><span style="font-family: 宋体">（</span>7<span style="font-family: 宋体">）</span><span style="font-family: Calibri">Keep variable value</span></p>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">勾选此选项，在集合运行当中，环境变量或者全局变量中的变量可能会发生改变。</span></p>
+<p><span style="font-family: 宋体">点击</span>“<span style="font-family: Calibri">Run</span><span style="font-family: 宋体">”</span><span style="font-family: Calibri">,</span><span style="font-family: 宋体">结果如下图，全部</span><span style="font-family: Calibri">PASS</span><span style="font-family: 宋体">。</span></p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010846120-96560250.png" alt="" class="medium-zoom-image"></p>
+<h2>5.5使用数据文件</h2>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">数据文件是用不同的数据来测试</span>API，以检查他们在各种情况下是否正常运行。下面以“CRM系统接口”中的“新增客户”接口为例。名字和号码用变量{{name}}和{{phone}}表示</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010400880-2117762936.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">（</span>1<span style="font-family: 宋体">）</span><span style="font-family: 宋体">使用</span>CSV<span style="font-family: 宋体">格式参数</span></p>
+<p><span style="font-family: 宋体">准备了新增客户</span>.csv文件，有名字和号码三组CSV参数（比如手机号的位数，号段，就可以这么参数化）</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010436102-1140005692.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">打开</span>Collection Runner集合运行器窗口，如图设置：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010620377-1941775259.png" alt="" class="medium-zoom-image"></p>
+<p>Environment选择“CRM”环境</p>
+<p>Iterations设置3次，因为准备了3组数据，所以需要迭代3次</p>
+<p>Data数据中，点击“Select File”选择“新增客户.CSV”，点击Preview,可以看到每个变量在各次迭代中的值：</p>
+<p>&nbsp;<img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010653362-1671549459.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">点击</span>”Run”，结果如下图，“新增客户”循环3次，PASS</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010745059-1206831092.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">（</span>2<span style="font-family: 宋体">）</span><span style="font-family: 宋体">使用</span>JSON<span style="font-family: 宋体">格式参数</span></p>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">同样准备</span>name和phone 3组参数</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010928558-592239511.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">打开</span>Collection Runner集合运行器窗口，如图设置：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116010957460-1670183420.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">再次点击</span>“Run”,结果如下图<span style="font-family: 宋体">，同样迭代</span>3次，全部PASS</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011036308-1666949916.png" alt="" class="medium-zoom-image"></p>
+<h2>5.6集合运行结果排错</h2>
+<p><strong>&nbsp;&nbsp;</strong><span style="font-family: 宋体">使用</span>“5.使用数据文件”中的例子，再一次点击“Run”,结果如下：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011129061-399910576.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">可以看到</span>PASS 3条，fail3条。首先对此界面的一些功能进行介绍。</p>
+<p>·过滤器：可以看到左侧边栏包含3个红绿图标，用来筛选通过或失败的测试，点击红色图标，筛选出失败测试。</p>
+<p>&nbsp;<img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011218039-186202752.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;·Run Summary:调试多次迭代，方便查看迭代结果，循环了3次，3次都失败了。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011247211-1312737018.png" alt="" class="medium-zoom-image"></p>
+<p><span style="font-family: 宋体">接下来介绍</span>2种排错方式:</p>
+<p>&nbsp;(1)<span style="font-family: 宋体">通过请求体和响应体来排错</span></p>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-family: 宋体">点击</span>“新增客户”，会出现浮动窗口，可以单击列表行来查看对应的内容，如下图：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011326696-1183626283.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">单击</span>“Response Body”,查看响应体的内容,如下图：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011401116-718319255.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">可以看出响应体中显示</span>“该客户手机号已存在”（因为请求参数是第二次应用），符合逻辑。</p>
+<p>(2)<span style="font-family: 宋体">通过</span><span style="font-family: Calibri">Postman</span><span style="font-family: 宋体">的</span><span style="font-family: Calibri">Console</span></p>
+<p><span style="font-family: 宋体">在</span>Postman窗口左下角，点击下方图标，再次在Collection Runner集合运行器中，运行上方的集合。</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011423493-681465780.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;<span style="font-family: 宋体">此时再次查看</span>“Postman Console”窗口，如下图：</p>
+<p><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/1747629-20200116011454477-1103940524.png" alt="" class="medium-zoom-image"></p>
+<p>&nbsp;“Postman Console”<span style="font-family: 宋体">窗口将记录所有请求并将它们都显示在列表中，找到</span>“新增客户”请求，然后观察“Response Body”,显示“该客户手机号码已存在”，2种方法结果一致。</p>
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/yingjiyu/category/1632960.html" target="_blank">Postman</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(12199415,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;e2dae0b8-c371-4d3e-a096-08d70b201852&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/yingjiyu/" target="_blank"><img src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/yingjiyu/">DaBenYing</a><br>
+            <a href="https://home.cnblogs.com/u/yingjiyu/followees/">关注 - 3</a><br>
+            <a href="https://home.cnblogs.com/u/yingjiyu/followers/">粉丝 - 0</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;e2dae0b8-c371-4d3e-a096-08d70b201852&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(12199415,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(12199415,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/yingjiyu/p/12190130.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/yingjiyu/p/12190130.html" title="发布于 2020-01-14 01:41">grafana+prometheus安装</a>
+    <br>
+    <a href="https://www.cnblogs.com/yingjiyu/p/14323356.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/yingjiyu/p/14323356.html" title="发布于 2020-01-25 15:00">shell脚本简单搭建测试环境</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-16 01:16</span>&nbsp;
+<a href="https://www.cnblogs.com/yingjiyu/">DaBenYing</a>&nbsp;
+阅读(<span id="post_view_count">1872</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12199415" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12199415);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: &#39;&#39;, targetType: &#39;blogPost&#39;, targetId: &#39;12199415&#39;, targetLink: &#39;https://www.cnblogs.com/yingjiyu/p/12199415.html&#39;, title: &#39;第5章Postman工具之collection集合&#39; })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+
+<script src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/highlight.min.js.下载" async="" onload="markdown_highlight()"></script>
+<script>
+    var allowComments = true, cb_blogId = 528843, cb_blogApp = 'yingjiyu', cb_blogUserGuid = 'e2dae0b8-c371-4d3e-a096-08d70b201852';
+    var cb_entryId = 12199415, cb_entryCreatedDate = '2020-01-16 01:16', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/yingjiyu/p/12199415.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/yingjiyu/p/12199415.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    登录后才能查看或发表评论，立即 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return account.login(&#39;!comments&#39;);">登录</a> 或者
+    <a href="https://www.cnblogs.com/">逛逛</a> 博客园首页
+</div>
+</div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="cnblogs_ch"><a href="http://www.uccpsoft.com/index.htm" target="_blank" onclick="gtag(&#39;event&#39;, &#39;click&#39;, {&#39;event_category&#39;: &#39;ad&#39;, &#39;event_label&#39;: &#39;T2-ucancode&#39;})">【推荐】跨平台组态\工控\仿真\CAD 50万行C++源码全开放免费下载！</a><br><a href="https://www.cnblogs.com/cmt/p/15375689.html" target="_blank" onclick="gtag(&#39;event&#39;, &#39;click&#39;, {&#39;event_category&#39;: &#39;ad&#39;, &#39;event_label&#39;: &#39;T2-并行科技&#39;})">【推荐】并行超算云面向博客园粉丝推出“免费算力限时申领”特别活动</a><br><a href="https://brands.cnblogs.com/huawei/p/2368" target="_blank">【推荐】HMS Core线上Codelabs挑战赛第3期：用3D建模构建元宇宙</a><br><img style="display:none" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/k=2270067&amp;p=7zt0O&amp;dx=__IPDX__&amp;rt=2&amp;pro=s&amp;ns=__IP__&amp;ni=__IESID__&amp;v=__LOC__&amp;xa=__ADPLATFORM__&amp;tr=__REQUESTID__&amp;vg=__AUTOPLAY__&amp;nh=__AUTOREFRESH__&amp;mo=__OS__&amp;m0=__OPENUDID__&amp;m0a=__DUID__&amp;m1=__ANDROIDID1__&amp;m1a=_"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+             <a onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;banner&#39;, &#39;click&#39;, &#39;Pangle-C1&#39;)" target="_blank" rel="nofollow" href="https://c.gridsumdissector.com/r/?gid=gad_545_mzyfo0un&amp;ck=46&amp;adk=566&amp;autorefresh=__AUTOREFRESH__">
+                <img style="width: 300px; height: 250px;" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/35695-20211008160624813-1694591598.jpg" alt="" onload="impressC1()">
+             </a>
+    </div>
+    <div id="under_post_card1"><div class="under-post-card">
+<b>编辑推荐：</b>
+<br>
+
+· <a href="https://www.cnblogs.com/xuanyuan/p/15502289.html" target="_blank">一次 fork 引发的惨案！</a>
+    <br>
+· <a href="https://www.cnblogs.com/myshowtime/p/15500050.html" target="_blank">OAuth 2.0 的探险之旅</a>
+    <br>
+· <a href="https://www.cnblogs.com/shanyou/p/15494215.html" target="_blank">.NET 生态系统的蜕变之 .NET 6</a>
+    <br>
+· <a href="https://www.cnblogs.com/yexiaochai/p/15477117.html" target="_blank">从顶层设计聊公司治理</a>
+    <br>
+· <a href="https://www.cnblogs.com/rickiyang/p/15466594.html" target="_blank">存储技术发展过程</a>
+    <br>
+</div></div>
+    <div id="under_post_card2"><div class="itnews under-post-card">
+    <b>最新新闻</b>：
+    <br>
+ ·          <a href="https://news.cnblogs.com/n/706232/" target="_blank">美股周三又创历史新高：特斯拉涨逾3% 阿里涨超2%（2021-11-04 08:42）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/706237/" target="_blank">这届消费者，不敢给差评（2021-11-04 08:32）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/706231/" target="_blank">乘着“元宇宙”的东风 英伟达超越伯克希尔成为美国第七大公司（2021-11-04 08:26）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/706229/" target="_blank">NASA：不要错过11月7日月亮与金星的美丽相遇（2021-11-04 08:21）</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/706228/" target="_blank">贝佐斯出售20亿美元亚马逊股票 此前承诺捐款应对气候变化（2021-11-04 08:17）</a>
+        <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/yingjiyu/">
+            DaBenYing
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/yingjiyu/" title="入园时间：2019-07-20">
+            2年3个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/yingjiyu/followers/">
+            0
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/yingjiyu/followees/">
+            3
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;e2dae0b8-c371-4d3e-a096-08d70b201852&#39;)">+加关注</a></div>
+        <script>getFollowStatus('e2dae0b8-c371-4d3e-a096-08d70b201852');</script>
+    </div>
+</div>
+
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="">
+
+<table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar" border="0">
+    <tbody>
+        <tr>
+            <td colspan="7">
+                <table class="CalTitle" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2021/10/04&#39;); return false;">&lt;</a>
+                            </td>
+                            <td align="center">2021年11月</td>
+                            <td align="right" class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2021/12/04&#39;); return false;">&gt;</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    <tr>
+        <th class="CalDayHeader" align="center" abbr="日" scope="col">日</th>
+        <th class="CalDayHeader" align="center" abbr="一" scope="col">一</th>
+        <th class="CalDayHeader" align="center" abbr="二" scope="col">二</th>
+        <th class="CalDayHeader" align="center" abbr="三" scope="col">三</th>
+        <th class="CalDayHeader" align="center" abbr="四" scope="col">四</th>
+        <th class="CalDayHeader" align="center" abbr="五" scope="col">五</th>
+        <th class="CalDayHeader" align="center" abbr="六" scope="col">六</th>
+    </tr>
+            <tr>
+                            <td class="CalOtherMonthDay" align="center">31</td>
+                        <td class="" align="center">
+                            1
+                        </td>
+                        <td class="" align="center">
+                            2
+                        </td>
+                        <td class="" align="center">
+                            3
+                        </td>
+                        <td class="CalTodayDay" align="center">
+                            4
+                        </td>
+                        <td class="" align="center">
+                            5
+                        </td>
+                    <td class="CalWeekendDay" align="center">
+                        6
+                    </td>
+            </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            7
+                        </td>
+                            <td class="" align="center">
+                                8
+                            </td>
+                            <td class="" align="center">
+                                9
+                            </td>
+                            <td class="" align="center">
+                                10
+                            </td>
+                            <td class="" align="center">
+                                11
+                            </td>
+                            <td class="" align="center">
+                                12
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            13
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            14
+                        </td>
+                            <td class="" align="center">
+                                15
+                            </td>
+                            <td class="" align="center">
+                                16
+                            </td>
+                            <td class="" align="center">
+                                17
+                            </td>
+                            <td class="" align="center">
+                                18
+                            </td>
+                            <td class="" align="center">
+                                19
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            20
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            21
+                        </td>
+                            <td class="" align="center">
+                                22
+                            </td>
+                            <td class="" align="center">
+                                23
+                            </td>
+                            <td class="" align="center">
+                                24
+                            </td>
+                            <td class="" align="center">
+                                25
+                            </td>
+                            <td class="" align="center">
+                                26
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            27
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            28
+                        </td>
+                            <td class="" align="center">
+                                29
+                            </td>
+                            <td class="" align="center">
+                                30
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                1
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                2
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                3
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            4
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalOtherMonthDay" align="center">
+                            5
+                        </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                6
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                7
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                8
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                9
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                10
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            11
+                        </td>
+                </tr>
+    </tbody>
+</table></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+<div id="sidebar_shortcut" class="sidebar-block"><div class="catListLink">
+<h3 class="catListTitle">
+常用链接
+</h3>
+<ul>
+    
+<li><a href="https://www.cnblogs.com/yingjiyu/p/" title="我的博客的随笔列表">我的随笔</a></li>
+<li><a href="https://www.cnblogs.com/yingjiyu/MyComments.html" title="我的发表过的评论列表">我的评论</a></li>
+<li><a href="https://www.cnblogs.com/yingjiyu/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li>
+<li><a href="https://www.cnblogs.com/yingjiyu/RecentComments.html" title="我的博客的评论列表">最新评论</a></li>
+<li><a href="https://www.cnblogs.com/yingjiyu/tag/" title="我的博客的标签列表">我的标签</a></li>
+
+</ul>
+</div>
+
+</div>
+
+<!-- 最新随笔 -->
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block"></div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+
+    <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+        <h3 class="catListTitle">
+            
+随笔分类
+
+
+
+        </h3>
+
+        <ul>
+
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1632218.html" rel="" target="">
+    grafana+prometheus(5)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1645667.html" rel="" target="">
+    jenkins(14)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1664393.html" rel="" target="">
+    jmeter(4)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1513151.html" rel="" target="">
+    linux(12)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1643817.html" rel="" target="">
+    maven(1)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1513152.html" rel="" target="">
+    MySQL(3)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1632960.html" rel="" target="">
+    Postman(7)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1645718.html" rel="" target="">
+    python自动化(2)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1663937.html" rel="" target="">
+    安全(10)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1632217.html" rel="" target="">
+    管理工具jira(2)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/category/1513144.html" rel="" target="">
+    网络通信(3)
+</a>
+ 
+                </li>                
+            
+        </ul>
+
+
+    </div>    
+    <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+        <h3 class="catListTitle">
+            
+随笔档案
+
+
+
+        </h3>
+
+        <ul>
+
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2020/03.html" rel="" target="">
+    2020年3月(5)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2020/02.html" rel="" target="">
+    2020年2月(5)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2020/01.html" rel="" target="">
+    2020年1月(26)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2019/11.html" rel="" target="">
+    2019年11月(1)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2019/08.html" rel="" target="">
+    2019年8月(2)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2019/07.html" rel="" target="">
+    2019年7月(23)
+</a>
+ 
+                </li>                
+                <li data-category-list-item-visible="true" style="display: block">
+                    
+<a href="https://www.cnblogs.com/yingjiyu/archive/2019/06.html" rel="" target="">
+    2019年6月(1)
+</a>
+ 
+                </li>                
+            
+        </ul>
+
+
+    </div>    
+</div>
+
+<!-- 最新评论 -->
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block"><div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12443072.html">
+                            1. grafana-配置数据库(2224)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12199415.html">
+                            2. 第5章Postman工具之collection集合(1872)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12443172.html">
+                            3. grafana-用户权限配置(1676)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12443917.html">
+                            4. jmeter分布式master、slave配置(1116)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12440336.html">
+                            5. kali Linux-nc(1017)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/11278080.html">
+                            6. 目录与路径(951)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12440391.html">
+                            7. Metasploit(MSF)实战(908)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12440352.html">
+                            8. TCP/IP与数据包抓取分析(893)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/11273630.html">
+                            9. 目录与文件权限的意义区别(675)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/yingjiyu/p/12190130.html">
+                            10. grafana+prometheus安装(666)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block"></div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block"></div><div id="sidebar_recentcomments" class="sidebar-block"></div>
+
+
+</div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2021 DaBenYing
+<br><span id="poweredby">Powered by .NET 6 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8FO3GXnjClZGrNGr2Ic8Z1oIDtT7PQB4bvIH3iYXOpJQvATtyxk4Ba3w7gfct0-8G42OcQEuhIygN68Uq7o4WQTuD2GwYJoRL9sQYTyNh5m4TPUgom0iMwKrhB2961pDhxGDIBc0KvE6bQTZELxCkJ8">
+    <script async="" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/js"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var kv = getGACustom();
+    if (kv) {
+        gtag('set', kv);
+    }
+    gtag('config', 'UA-476124-1');
+    </script>
+    <script defer="" src="./第5章Postman工具之collection集合 - DaBenYing - 博客园_files/hm.js.下载"></script>
+
+
+</body></html>
